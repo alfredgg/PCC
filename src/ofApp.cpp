@@ -1,6 +1,10 @@
 #include "ofApp.h"
 #include "ofxJSON.h"
 
+float TravellingCircle::fullyVisibleTime = 5.0f;
+float TravellingCircle::fadeTime = 5.0f;
+float LauncherCircle::marginInLaunches = 0.25f;
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofLog() << "Starting application";
@@ -18,6 +22,10 @@ void ofApp::configure() {
 	ofxJSONElement config;
 	bool parsingSuccessful = config.open("settings.json");
 	if (parsingSuccessful) {
+		LauncherCircle::marginInLaunches = config["secs_between_launches"].asFloat();
+		TravellingCircle::fullyVisibleTime = config["secs_traveller_fully_visible"].asFloat();
+		TravellingCircle::fadeTime = config["secs_traveller_fade"].asFloat();
+
 		auto senderConfig = config["sender"];
 		sender.setup(senderConfig["ip"].asString(),
 				senderConfig["port"].asInt());

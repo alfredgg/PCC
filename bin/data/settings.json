@@ -6,6 +6,9 @@
 		"ip": "127.0.0.1",
 		"port": 8888
 	},
+	"secs_between_launches": 0.25,
+	"secs_traveller_fully_visible": 5.0,
+	"secs_traveller_fade": 5.0,
 	"colors": [
 		{
 			"rgb": "255, 0, 0",

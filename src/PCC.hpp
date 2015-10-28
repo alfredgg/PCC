@@ -79,12 +79,12 @@ public:
 	float startedAt = 0;
 	bool enabled = true;
 	ofEvent<DestroyCircleData> diedCircle;
+	static float fullyVisibleTime;
+	static float fadeTime;
 
 	float static constexpr launchForce = 25.0f;
 	float static constexpr innerSize = 5;
 	float static constexpr externalSize = innerSize * 2;
-	float static constexpr travellerLife = 5.0;
-	float static constexpr travellerDeath = 5.0;
 	int static const noisyLineWidth = 2;
 
 	TravellingCircle() {
@@ -112,12 +112,12 @@ public:
 		if (box2dCircle->getB2DPosition().distance(box2dCircle->getB2DPosition() + box2dCircle->getVelocity()) > minMoveDistance)
 			box2dCircle->setVelocity(box2dCircle->getVelocity() * 0.97f);
 
-		float timeAlive = startedAt + travellerLife;
+		float timeAlive = startedAt + fullyVisibleTime;
 		float remainingTimeAlive = timeAlive - ofGetElapsedTimef();
 		bool dying = remainingTimeAlive < 0;
 
 		if (dying) {
-			float remainingTimeVisible = remainingTimeAlive + travellerDeath;
+			float remainingTimeVisible = remainingTimeAlive + fadeTime;
 			bool shouldBeRemoved = remainingTimeVisible < 0;
 			if (shouldBeRemoved) {
 				circleColor.a = 0;
@@ -126,7 +126,7 @@ public:
 				enabled = false;
 				return;
 			}
-			circleColor.a = (remainingTimeVisible / travellerDeath) * iniAlpha;
+			circleColor.a = (remainingTimeVisible / fadeTime) * iniAlpha;
 		}
 	}
 
@@ -183,13 +183,13 @@ public:
 	float static constexpr waves_ratio = 2.0f;
 	float static constexpr innerSize = 50;
 	float static constexpr externalSize = 60;
-	float static constexpr marginInLaunches = 0.25f;
 
 	float minAngle, maxAngle, currentSinValue = 0;
 	ofColor innerColor = ofColor(240, 240, 240, 0), externalColor = ofColor(215,
 			185, 140, 0), waveColor = ofColor(255, 222, 166, 0);
 	ofPoint position;
 	bool valid = false;
+	static float marginInLaunches;
 
 	LauncherCircle() {
 	}
