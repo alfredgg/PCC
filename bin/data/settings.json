@@ -1,0 +1,55 @@
+{
+	"receiver": {
+		"port": 8000
+	},
+	"sender": {
+		"ip": "127.0.0.1",
+		"port": 8888
+	},
+	"colors": [
+		{
+			"rgb": "255, 0, 0",
+			"threshold": 200,
+			"representation": "198, 70, 65"
+		},
+		{
+			"rgb": "0, 255, 0",
+			"threshold": 200,
+			"representation": "90, 170, 90"
+		},
+		{
+			"rgb": "0, 0, 255",
+			"threshold": 0200,
+			"representation": "82, 72, 172"
+		}
+	],
+	"launchers": [
+		{
+			"rgb": "235, 110, 45, 255",
+			"border": "190, 80, 15, 200",
+			"wave": "190, 80, 15, 25",
+			"id": "1",
+			"min_angle": 5,
+			"max_angle": 85,
+			"position": "100, 100"
+		},
+		{
+			"rgb": "160, 170, 50, 255",
+			"border": "170, 190, 15, 200",
+			"wave": "190, 80, 15, 25",
+			"id": "2",
+			"min_angle": 225,
+			"max_angle": 315,
+			"position": "512, 650"
+		},
+		{
+			"rgb": "60, 100, 150, 255",
+			"border": "75, 90, 107, 200",
+			"wave": "190, 80, 15, 25",
+			"id": "3",
+			"min_angle": 95,
+			"max_angle": 175,
+			"position": "924, 100"
+		}
+	]
+}
