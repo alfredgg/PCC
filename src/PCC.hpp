@@ -12,6 +12,8 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 
+#define LAUNCH_FORCE 25.
+
 class ColorReceivedMessage {
 public:
 	ofColor color;
@@ -82,9 +84,9 @@ public:
 	static float fullyVisibleTime;
 	static float fadeTime;
 
-	float static constexpr launchForce = 25.0f;
-	float static constexpr innerSize = 5;
-	float static constexpr externalSize = innerSize * 2;
+	float launchForce = LAUNCH_FORCE;
+	float innerSize = 5;
+	float externalSize = innerSize * 2;
 	int static const noisyLineWidth = 2;
 
 	TravellingCircle() {
@@ -174,15 +176,16 @@ class LauncherCircle {
 private:
 	int static const n_waves = 50;
 	float next_sec_wave = 0;
-	array<float, n_waves> waves;
+    vector<float> waves;
 	float nextTimeLaunch = 0;
 
 public:
 
-	float static constexpr waves_velocity = 0.5f;
-	float static constexpr waves_ratio = 2.0f;
-	float static constexpr innerSize = 50;
-	float static constexpr externalSize = 60;
+	float  waves_velocity = 0.5f;
+	float  waves_ratio = 2.0f;
+	float  innerSize = 50;
+    float  externalSize = 60;
+    float launchForce = LAUNCH_FORCE;
 
 	float minAngle, maxAngle, currentSinValue = 0;
 	ofColor innerColor = ofColor(240, 240, 240, 0), externalColor = ofColor(215,
@@ -219,7 +222,7 @@ public:
 		maxAngle = _maxAngle;
 
 		for (int i = 0; i < n_waves; i++)
-			waves[i] = 0;
+			waves.push_back(0);
 
 		valid = true;
 	}
@@ -298,7 +301,7 @@ public:
 	}
 
 	ofPoint getTravellerPosition(ofPoint direction) {
-		return (direction * externalSize + TravellingCircle::launchForce)
+		return (direction * externalSize + launchForce)
 				+ position;
 	}
 };
